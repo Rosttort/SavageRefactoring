@@ -1,30 +1,48 @@
 require: rubocop-rspec
 
+AllCops:
+  NewCops: enable
+  Exclude:
+    - "spec/account_spec.rb"
+    - "account.rb"
+
 RSpec/MessageChain:
   Enabled: false
 
 RSpec/NestedGroups:
-  Max: 5
+  Max: 10
 
 RSpec/MultipleExpectations:
   Max: 5
 
 RSpec/ExampleLength:
-  Max: 10
+  Max: 15
 
 RSpec/MessageSpies:
-  Enabled: false
+  EnforcedStyle: receive
 
 Metrics/BlockLength:
   Exclude:
-    - 'Gemfile'
-    - 'spec/**/*.rb'
+    - "Gemfile"
+    - "spec/**/*.rb"
 
-Metrics/LineLength:
+Metrics/ClassLength:
+  Max: 100
+
+Metrics/ModuleLength:
+  Max: 100
+
+Layout/LineLength:
   Max: 120
 
-Documentation:
+Style/Documentation:
   Enabled: false
 
-FrozenStringLiteralComment:
+Style/FrozenStringLiteralComment:
   Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/StubbedMock:
+  Enabled: true

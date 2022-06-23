@@ -1,5 +1,7 @@
+/.idea/
 .history
 accounts.yml
 spec/fixtures/account.yml
 coverage
 .DS_Store
+main_copy.rb

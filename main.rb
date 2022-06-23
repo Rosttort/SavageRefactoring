@@ -1,3 +1,3 @@
-require_relative 'account'
+require_relative 'loader'
 
-Account.new.console
+Entities::Console.new.console
