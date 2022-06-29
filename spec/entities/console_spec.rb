@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 HELLO_PHRASES = [
   I18n.t(:hello)
 ].freeze
 
-OVERRIDABLE_FILENAME = 'spec/fixtures/account.yml'.freeze
+OVERRIDABLE_FILENAME = 'spec/fixtures/account.yml'
 
 ASK_PHRASES = I18n.t(:input).freeze
 

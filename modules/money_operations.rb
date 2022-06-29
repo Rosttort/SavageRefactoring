@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Modules
   module MoneyOperations
     include Modules::ConsoleHelper
@@ -7,7 +9,7 @@ module Modules
       return false unless check_amount(amount)
       return false if withdraw_not_enough?(current_card.balance, amount, current_card.withdraw_tax(amount))
 
-      current_card.withdraw(amount)
+      current_card.withdraw_or_sent(amount, 'withdraw')
       output_withdraw_message(amount, current_card)
       true
     end
@@ -23,14 +25,14 @@ module Modules
 
     def send_operation(sender_card, recipient_card, amount)
       return false unless check_amount(amount)
-      return false if withdraw_not_enough?(sender_card.balance, amount, sender_card.withdraw_tax(amount))
+      return false if withdraw_not_enough?(sender_card.balance, amount, sender_card.sender_tax(amount))
       return false if receive_not_enough?(amount, recipient_card.put_tax(amount))
 
       recipient_put(amount, recipient_card)
 
-      sender_card.withdraw(amount)
-      output_put_message(amount, sender_card, sender_card.sender_tax(amount), sender_card.balance)
-      output_put_message(amount, recipient_card, recipient_card.put_tax(amount), recipient_card.balance)
+      sender_card.withdraw_or_sent(amount, 'sender')
+      output_put_message(amount, sender_card.number, sender_card.sender_tax(amount), sender_card.balance)
+      output_put_message(amount, recipient_card.number, recipient_card.put_tax(amount), recipient_card.balance)
       true
     end
 

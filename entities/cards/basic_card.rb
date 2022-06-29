@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Entities
   module Cards
     class BasicCard
-      CAPITALIST_CARD = 'capitalist'.freeze
-      USUAL_CARD = 'usual'.freeze
-      VIRTUAL_CARD = 'virtual'.freeze
+      CAPITALIST_CARD = 'capitalist'
+      USUAL_CARD = 'usual'
+      VIRTUAL_CARD = 'virtual'
       CARD_DIGITS = (0..9).freeze
       CARD_NUMBER_LENGTH = 16
 
@@ -15,16 +17,12 @@ module Entities
         @balance = start_balance
       end
 
-      def withdraw(amount)
-        @balance -= amount + withdraw_tax(amount)
+      def withdraw_or_sent(amount, type)
+        @balance -= amount + public_send("#{type}_tax", amount)
       end
 
       def put(amount)
         @balance += amount - put_tax(amount)
-      end
-
-      def sent(amount)
-        @balance -= amount + sender_tax(amount)
       end
 
       def withdraw_tax(amount)

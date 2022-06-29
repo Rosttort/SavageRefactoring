@@ -1,14 +1,14 @@
+# frozen_string_literal: true
+
 module Modules
   module Commands
     module AccountCommands
-      include Modules::ConsoleHelper
-      include Modules::Validation
-      include Modules::DataLoader
+      include Modules::AccountValidate
 
       def create_account
         loop do
           account = Entities::Account.new(create_account_fields)
-          account.errors.push(I18n.t('validation.login.exists')) if value_exist?(account.login, accounts.map(&:login))
+          account_errors(account)
           break account if account.valid?
 
           show_errors(account.errors)
@@ -35,13 +35,6 @@ module Modules
         else
           main_console.console
         end
-      end
-
-      def destroy_account(current_account)
-        return unless confirmed?(user_input('common.destroy_account'))
-
-        accounts_left = accounts.delete_if { |account| account.login == current_account.login }
-        save_data(file_path, accounts_left)
       end
 
       private

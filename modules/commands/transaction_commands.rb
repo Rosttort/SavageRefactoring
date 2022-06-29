@@ -1,14 +1,9 @@
+# frozen_string_literal: true
+
 module Modules
   module Commands
     module TransactionCommands
-      include Modules::ConsoleHelper
-      include Modules::Validation
-      include Modules::DataLoader
       include Modules::MoneyOperations
-
-      def update_current_account(current_account)
-        @current_account = current_account
-      end
 
       def withdraw_money
         output_message('common.choose_card_withdrawing')

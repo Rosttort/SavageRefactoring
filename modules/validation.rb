@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Modules
   module Validation
     MIN_LOGIN_LENGTH = 4

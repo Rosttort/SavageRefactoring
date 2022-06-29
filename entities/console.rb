@@ -1,11 +1,11 @@
+# frozen_string_literal: true
+
 module Entities
   class Console
-    include Modules::ConsoleHelper
-    include Modules::DataLoader
-    include Modules::Validation
     include Modules::Commands::AccountCommands
     include Modules::Commands::CardCommands
     include Modules::Commands::TransactionCommands
+    include Modules::ConsoleHelper
 
     attr_accessor :file_path, :current_account, :transaction_commands
 
@@ -22,9 +22,10 @@ module Entities
       end
     end
 
+    private
+
     def create
       @current_account = create_account
-      update_current_account(current_account)
       new_accounts = accounts << current_account
       save_data(@file_path, new_accounts)
       main_menu
@@ -44,21 +45,14 @@ module Entities
       case command.upcase
       when *Modules::Constants::CARD_COMMANDS then card_command_choose(command)
       when *Modules::Constants::MONEY_COMMANDS then money_command_choose(command)
-      when Modules::Constants::OPERATIONS[:destroy_account] then destroy_account(current_account)
+      when Modules::Constants::OPERATIONS[:destroy_account] then current_account.destroy_account(current_account)
       else output_message('error.wrong_command')
       end
     end
 
-    private
-
     def load
       @current_account = load_account
-      update_current_account(current_account)
       main_menu
-    end
-
-    def update_current_account(current_account)
-      update_current_account_command(current_account)
     end
 
     def card_command_choose(command)

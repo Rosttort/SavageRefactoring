@@ -1,7 +1,13 @@
+# frozen_string_literal: true
+
 module Modules
   module AccountValidate
     include Modules::Validation
 
+    def account_errors(account)
+      account.errors.push(I18n.t('validation.login.exists')) if value_exist?(account.login, accounts.map(&:login))
+    end
+    
     private
 
     def validate_name

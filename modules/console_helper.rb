@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Modules
   module ConsoleHelper
     include Modules::DataLoader
@@ -10,9 +12,13 @@ module Modules
       load_data(@file_path)
     end
 
-    private
+    def show_cards
+      return output_message('error.no_active_cards') unless current_account.cards.any?
 
-    def push_in_db(accounts_to_store, _current_account)
+      show_cards_list(current_account.cards)
+    end
+    
+    def push_in_db(accounts_to_store, current_account)
       load_data(@file_path).each do |ac|
         if ac.login == @current_account.login
           accounts_to_store.push(@current_account)

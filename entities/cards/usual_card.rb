@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 module Entities
   module Cards
     class UsualCard < BasicCard
-      def type
-        USUAL_CARD
-      end
+      attr_reader :type
 
-      def number
-        @number ||= generate_card_number
+      def initialize
+        @type = USUAL_CARD
+        super
       end
 
       private

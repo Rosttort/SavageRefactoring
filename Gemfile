@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 require 'bundler'
 
-gem 'i18n'
+gem 'i18n', '~> 1.8'
 
 group :development do
   gem 'fasterer', '~> 0.9.0'

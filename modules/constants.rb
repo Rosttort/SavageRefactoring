@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 module Modules
   module Constants
     CARD_TYPES = %w[capitalist usual virtual].freeze
-    FILE_PATH = 'data/accounts.yml'.freeze
-    CREATE_COMMAND = 'create'.freeze
-    LOAD_COMMAND = 'load'.freeze
+    FILE_PATH = 'data/accounts.yml'
+    CREATE_COMMAND = 'create'
+    LOAD_COMMAND = 'load'
     CARD_COMMANDS = %w[CC SC DC].freeze
     MONEY_COMMANDS = %w[PM WM SM].freeze
-    AGREE_COMMAND = 'y'.freeze
-    EXIT_COMMAND = 'exit'.freeze
+    AGREE_COMMAND = 'y'
+    EXIT_COMMAND = 'exit'
     CARD_NUMBER_LENGTH = 12
     OPERATIONS = { show_cards: 'SC',
                    create_card: 'CC',
