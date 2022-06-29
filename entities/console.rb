@@ -26,8 +26,7 @@ module Entities
 
     def create
       @current_account = create_account
-      new_accounts = accounts << current_account
-      save_data(@file_path, new_accounts)
+      new_accounts_save(current_account)
       main_menu
     end
 

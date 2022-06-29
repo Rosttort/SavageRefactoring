@@ -12,6 +12,11 @@ module Modules
       load_data(@file_path)
     end
 
+    def new_accounts_save(current_account)
+      new_accounts = accounts << current_account
+      save_data(@file_path, new_accounts)
+    end
+
     def show_cards
       return output_message('error.no_active_cards') unless current_account.cards.any?
 
