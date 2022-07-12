@@ -7,11 +7,7 @@ module Entities
     include Modules::Commands::TransactionCommands
     include Modules::ConsoleHelper
 
-    attr_accessor :file_path, :current_account, :transaction_commands
-
-    def initialize
-      @file_path = Modules::Constants::FILE_PATH
-    end
+    attr_accessor :current_account, :transaction_commands
 
     def console
       scenario = user_input(:hello)
@@ -22,14 +18,6 @@ module Entities
       end
     end
 
-    private
-
-    def create
-      @current_account = create_account
-      new_accounts_save(current_account)
-      main_menu
-    end
-
     def main_menu
       loop do
         output_message(:welcome, user_name: current_account.name)
@@ -38,6 +26,13 @@ module Entities
 
         check_command(command)
       end
+    end
+
+    private
+
+    def create
+      @current_account = create_account
+      main_menu
     end
 
     def check_command(command)

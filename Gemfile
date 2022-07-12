@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 require 'bundler'
 
-gem 'i18n', '~> 1.8'
+gem 'i18n', '~> 1.8.11'
 
 group :development do
   gem 'fasterer', '~> 0.9.0'
@@ -14,6 +14,7 @@ group :development do
 end
 
 group :test do
+  gem 'faker', '~> 2.21.0'
   gem 'rspec', '~> 3.10'
   gem 'simplecov', '~> 0.21.2'
   gem 'simplecov-lcov', '~> 0.8.0'

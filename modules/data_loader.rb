@@ -2,14 +2,14 @@
 
 module Modules
   module DataLoader
-    def load_data(file_path)
-      return [] unless File.exist?(file_path)
+    def load_data
+      return [] unless File.exist?(Modules::Constants::FILE_PATH)
 
-      YAML.load_file(file_path) || []
+      YAML.load_file(Modules::Constants::FILE_PATH) || []
     end
 
-    def save_data(file_path, data)
-      File.write(file_path, data.to_yaml)
+    def save_data(data)
+      File.write(Modules::Constants::FILE_PATH, data.to_yaml)
     end
   end
 end

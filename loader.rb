@@ -3,6 +3,7 @@
 require 'yaml'
 require 'i18n'
 require 'pry'
+require 'faker'
 
 require_relative 'config/config'
 

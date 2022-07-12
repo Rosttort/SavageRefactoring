@@ -4,7 +4,7 @@ module Entities
   class Account
     include Modules::ConsoleHelper
     include Modules::AccountValidate
-    
+
     attr_reader :name, :age, :login, :password, :errors
     attr_accessor :cards, :file_path
 
@@ -35,9 +35,9 @@ module Entities
 
     def destroy_account(current_account)
       return unless confirmed?(user_input('common.destroy_account'))
-      @file_path = Modules::Constants::FILE_PATH
-      accounts_left = accounts.delete_if { |account| account.login == current_account.login }      
-      save_data(file_path, accounts_left)
+
+      accounts_left = accounts.delete_if { |account| account.login == current_account.login }
+      save_data(accounts_left)
     end
   end
 end

@@ -7,20 +7,20 @@ module Modules
 
       def withdraw_money
         output_message('common.choose_card_withdrawing')
-        current_card = find_card(current_account)
+        current_card = find_card(@current_account)
         return unless current_card
         return unless withdraw_operation(current_card, user_input('common.withdraw_amount').to_i)
 
-        store_card_data(current_account)
+        store_card_data(@current_account)
       end
 
       def put_money
         output_message('common.choose_card')
-        current_card = find_card(current_account)
+        current_card = find_card(@current_account)
         return unless current_card
         return unless put_operation(current_card, user_input('common.input_amount').to_i)
 
-        store_card_data(current_account)
+        store_card_data(@current_account)
       end
 
       def send_money
@@ -40,7 +40,7 @@ module Modules
         accounts_to_store = []
         push_in_db(accounts_to_store, current_account)
 
-        save_data(@file_path, accounts_to_store)
+        save_data(accounts_to_store)
       end
     end
   end

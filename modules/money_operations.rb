@@ -48,7 +48,7 @@ module Modules
     def store_card_data_for_send_operation(recipient_account)
       accounts_to_store = []
       push_in_db_for_recipient(accounts_to_store, recipient_account)
-      save_data(@file_path, accounts_to_store)
+      save_data(accounts_to_store)
     end
 
     def find_card_position_m(card)

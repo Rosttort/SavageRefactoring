@@ -3,8 +3,8 @@
       create_first_account: "There is no active accounts, do you want to be the first?[y/n]\n"
       destroy_account: "Are you sure you want to destroy account?[y/n]\n"
       if_you_want_to_delete: 'If you want to delete:'
-      choose_card: 'Choose the card for putting:'
-      choose_card_withdrawing: 'Choose the card for withdrawing:'
+      choose_card: "Choose the card for putting:\n"
+      choose_card_withdrawing: "Choose the card for withdrawing:\n"
       choose_card_sending: 'Choose the card for sending:'
       input_amount: 'Input the amount of money you want to put on your card'
       withdraw_amount: 'Input the amount of money you want to withdraw'
@@ -14,8 +14,8 @@
       \n- If you want to exit - press `exit`"
     input:
       name: 'Enter your name'
-      login: 'Enter your login'
-      password: 'Enter your password'
+      login: "Enter your login\n"
+      password: "Enter your password\n"
       age: 'Enter your age'
     cards:
       create_card: "You could create one of 3 card types
@@ -24,7 +24,7 @@
           \n- Virtual card. 1$ tax on card INCOME. 1$ tax on SENDING money from this card. 12% tax on WITHDRAWING money. For creation this card - press `virtual`
           \n- For exit - press `exit`"
       confirm_deletion: "Are you sure you want to delete %{number}?[y/n]"
-      card_with_index: "- %{number}, %{type}, press %{index}"
+      card_with_index: "- %{number}, %{type}, press %{index}\n"
       card: "- %{number}, %{type}"
       no_card: "There is no card with number #{number}\n"
     validation:

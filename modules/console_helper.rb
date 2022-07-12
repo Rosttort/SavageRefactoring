@@ -3,28 +3,29 @@
 module Modules
   module ConsoleHelper
     include Modules::DataLoader
+    include Modules::Validation
 
     def authenticated?(records)
       @login == records[:login] && @password == records[:password]
     end
 
     def accounts
-      load_data(@file_path)
+      load_data
     end
 
     def new_accounts_save(current_account)
       new_accounts = accounts << current_account
-      save_data(@file_path, new_accounts)
+      save_data(new_accounts)
     end
 
     def show_cards
-      return output_message('error.no_active_cards') unless current_account.cards.any?
+      return output_message('error.no_active_cards') unless @current_account.cards.any?
 
-      show_cards_list(current_account.cards)
+      show_cards_list(@current_account.cards)
     end
-    
-    def push_in_db(accounts_to_store, current_account)
-      load_data(@file_path).each do |ac|
+
+    def push_in_db(accounts_to_store, _current_account)
+      load_data.each do |ac|
         if ac.login == @current_account.login
           accounts_to_store.push(@current_account)
         else
@@ -34,7 +35,7 @@ module Modules
     end
 
     def push_in_db_for_recipient(accounts_to_store, recipient_account)
-      load_data(@file_path).each do |ac|
+      load_data.each do |ac|
         if ac.login == recipient_account.login
           accounts_to_store.push(recipient_account)
         else
@@ -89,7 +90,7 @@ module Modules
 
     def save_card_data(current_account)
       account_data = [current_account]
-      save_data(@file_path, account_data)
+      save_data(account_data)
     end
 
     def exit?(command)
@@ -125,7 +126,7 @@ module Modules
     end
 
     def save_cards_data(accounts_to_store)
-      save_data(@file_path, accounts_to_store)
+      save_data(accounts_to_store)
     end
   end
 end

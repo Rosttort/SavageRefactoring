@@ -4,11 +4,14 @@ module Modules
   module Commands
     module AccountCommands
       include Modules::AccountValidate
+      include Modules::ConsoleHelper
 
       def create_account
         loop do
           account = Entities::Account.new(create_account_fields)
+
           account_errors(account)
+          new_accounts_save(account)
           break account if account.valid?
 
           show_errors(account.errors)
