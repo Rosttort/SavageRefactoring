@@ -64,9 +64,11 @@ RSpec.describe Modules::Commands::AccountCommands do
         end
 
         context 'without small letter' do
-          it do
-            expect { account_service.create_account }.to output(/#{I18n.t("validation.name.first_letter")}/).to_stdout
-          end
+          it {
+            expect do
+              account_service.create_account
+            end.to output(/#{I18n.t("validation.name.first_letter")}/).to_stdout
+          }
         end
       end
 
@@ -86,13 +88,12 @@ RSpec.describe Modules::Commands::AccountCommands do
         end
 
         context 'when present' do
-          it do
-            expect { account_service.create_account }.to output(/#{I18n.t("validation.login.present")}/).to_stdout
-          end
+          it { expect { account_service.create_account }.to output(/#{I18n.t("validation.login.present")}/).to_stdout }
         end
 
         context 'when longer' do
-          let(:error_login_length_input) { 'E' * 3 }
+          let(:error_login_length_input) { 'A' * wrong_length }
+          let(:wrong_length) { Modules::Constants::LOGIN_MIN_LENGTH - 1 }
           let(:wrong_inputs) do
             [success_name_input, success_age_input, error_login_length_input, success_password_input]
           end
@@ -112,7 +113,8 @@ RSpec.describe Modules::Commands::AccountCommands do
         end
 
         context 'when shorter' do
-          let(:error_login_length_input) { 'E' * 21 }
+          let(:error_login_length_input) { 'A' * wrong_length }
+          let(:wrong_length) { Modules::Constants::LOGIN_MAX_LENGTH + 1 }
           let(:wrong_inputs) do
             [success_name_input, success_age_input, error_login_length_input, success_password_input]
           end
@@ -126,9 +128,7 @@ RSpec.describe Modules::Commands::AccountCommands do
             FileUtils.rm_rf(test_filename)
           end
 
-          it do
-            expect { account_service.create_account }.to output(/#{I18n.t("validation.login.shorter")}/).to_stdout
-          end
+          it { expect { account_service.create_account }.to output(/#{I18n.t("validation.login.shorter")}/).to_stdout }
         end
 
         context 'when exists' do
@@ -153,9 +153,7 @@ RSpec.describe Modules::Commands::AccountCommands do
             FileUtils.rm_rf(test_filename)
           end
 
-          it do
-            expect { account_service.create_account }.to output(/#{I18n.t("validation.login.exists")}/).to_stdout
-          end
+          it { expect { account_service.create_account }.to output(/#{I18n.t("validation.login.exists")}/).to_stdout }
         end
       end
 
@@ -175,9 +173,7 @@ RSpec.describe Modules::Commands::AccountCommands do
         end
 
         context 'with length minimum' do
-          it do
-            expect { account_service.create_account }.to output(/#{I18n.t("validation.age.length")}/).to_stdout
-          end
+          it { expect { account_service.create_account }.to output(/#{I18n.t("validation.age.length")}/).to_stdout }
         end
 
         context 'with length maximum' do
@@ -195,9 +191,7 @@ RSpec.describe Modules::Commands::AccountCommands do
             FileUtils.rm_rf(test_filename)
           end
 
-          it do
-            expect { account_service.create_account }.to output(/#{I18n.t("validation.age.length")}/).to_stdout
-          end
+          it { expect { account_service.create_account }.to output(/#{I18n.t("validation.age.length")}/).to_stdout }
         end
       end
 
@@ -218,25 +212,31 @@ RSpec.describe Modules::Commands::AccountCommands do
         context 'when absent' do
           let(:error_password_input) { '' }
 
-          it do
-            expect { account_service.create_account }.to output(/#{I18n.t("validation.password.present")}/).to_stdout
-          end
+          it {
+            expect do
+              account_service.create_account
+            end.to output(/#{I18n.t("validation.password.present")}/).to_stdout
+          }
         end
 
         context 'when longer' do
           let(:error_password_input) { 'E' * 5 }
 
-          it do
-            expect { account_service.create_account }.to output(/#{I18n.t("validation.password.longer")}/).to_stdout
-          end
+          it {
+            expect do
+              account_service.create_account
+            end.to output(/#{I18n.t("validation.password.longer")}/).to_stdout
+          }
         end
 
         context 'when shorter' do
           let(:error_password_input) { 'E' * 31 }
 
-          it do
-            expect { account_service.create_account }.to output(/#{I18n.t("validation.password.shorter")}/).to_stdout
-          end
+          it {
+            expect do
+              account_service.create_account
+            end.to output(/#{I18n.t("validation.password.shorter")}/).to_stdout
+          }
         end
       end
     end
@@ -276,9 +276,7 @@ RSpec.describe Modules::Commands::AccountCommands do
         let(:message_for_login) { I18n.t('input.login') }
         let(:message_for_password) { I18n.t('input.password') }
 
-        it do
-          expect { account_service.load_account }.to output(expected_message).to_stdout
-        end
+        it { expect { account_service.load_account }.to output(expected_message).to_stdout }
       end
     end
   end

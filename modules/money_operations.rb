@@ -9,7 +9,7 @@ module Modules
       return false unless check_amount(amount)
       return false if withdraw_not_enough?(current_card.balance, amount, current_card.withdraw_tax(amount))
 
-      current_card.withdraw_or_sent(amount, 'withdraw')
+      current_card.withdraw(amount, 'withdraw')
       output_withdraw_message(amount, current_card)
       true
     end
@@ -30,7 +30,7 @@ module Modules
 
       recipient_put(amount, recipient_card)
 
-      sender_card.withdraw_or_sent(amount, 'sender')
+      sender_card.withdraw(amount, 'sender')
       output_put_message(amount, sender_card.number, sender_card.sender_tax(amount), sender_card.balance)
       output_put_message(amount, recipient_card.number, recipient_card.put_tax(amount), recipient_card.balance)
       true

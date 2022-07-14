@@ -6,10 +6,12 @@ RSpec.describe Entities::Console do
   subject(:console) { described_class.new }
 
   describe '#console' do
-    context 'when correct method calling' do
-      context 'create account if input is create' do
+    context 'when success' do
+      context 'when create account if input is create' do
+        let(:create_command) { Modules::Constants::CREATE_COMMAND }
+
         before do
-          allow(console).to receive_message_chain(:gets, :chomp) { 'create' }
+          allow(console).to receive_message_chain(:gets, :chomp) { create_command }
         end
 
         it do
@@ -18,9 +20,11 @@ RSpec.describe Entities::Console do
         end
       end
 
-      context 'load account if input is load' do
+      context 'when load account if input is load' do
+        let(:load_command) { Modules::Constants::LOAD_COMMAND }
+
         before do
-          allow(console).to receive_message_chain(:gets, :chomp) { 'load' }
+          allow(console).to receive_message_chain(:gets, :chomp) { load_command }
         end
 
         it do
@@ -29,7 +33,7 @@ RSpec.describe Entities::Console do
         end
       end
 
-      context 'leave app if input is exit or some another word' do
+      context 'when leave app if input is exit or some another word' do
         before do
           allow(console).to receive_message_chain(:gets, :chomp) { 'another' }
         end
@@ -40,7 +44,7 @@ RSpec.describe Entities::Console do
         end
       end
 
-      context 'with correct outout' do
+      context 'with correct output' do
         before do
           allow(console).to receive_message_chain(:gets, :chomp) { 'test' }
           allow(console).to receive(:exit)
@@ -74,9 +78,7 @@ RSpec.describe Entities::Console do
 
       after { FileUtils.rm_rf(test_filename) }
 
-      it do
-        expect { console.main_menu }.to output(/Welcome, #{account.name}/).to_stdout
-      end
+      it { expect { console.main_menu }.to output(/Welcome, #{account.name}/).to_stdout }
     end
 
     context 'when commands used' do

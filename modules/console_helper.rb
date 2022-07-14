@@ -79,13 +79,13 @@ module Modules
       puts I18n.t(message, **parameters)
     end
 
-    def find_card(current_account)
-      return output_message('error.no_active_cards') if current_account.cards.empty?
+    def find_card
+      return output_message('error.no_active_cards') if @current_account.cards.empty?
 
-      card_position = find_card_position(current_account.cards)
+      card_position = find_card_position(@current_account.cards)
       return if exit?(card_position)
 
-      current_account.cards[card_position - 1]
+      @current_account.cards[card_position - 1]
     end
 
     def save_card_data(current_account)

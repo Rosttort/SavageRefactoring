@@ -93,9 +93,7 @@ RSpec.describe Modules::Commands::CardCommands do
         allow(card_service).to receive_message_chain(:gets, :chomp).and_return('test', 'usual')
       end
 
-      it do
-        expect { card_service.create_card }.to output(/#{I18n.t('error.wrong_card_type')}/).to_stdout
-      end
+      it { expect { card_service.create_card }.to output(/#{I18n.t('error.wrong_card_type')}/).to_stdout }
     end
   end
 
@@ -121,9 +119,7 @@ RSpec.describe Modules::Commands::CardCommands do
           end
         end
 
-        it do
-          expect { card_service.destroy_card }.to output(/#{I18n.t('common.if_you_want_to_delete')}/).to_stdout
-        end
+        it { expect { card_service.destroy_card }.to output(/#{I18n.t('common.if_you_want_to_delete')}/).to_stdout }
       end
 
       context 'when exit if first gets is exit' do

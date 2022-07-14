@@ -30,8 +30,5 @@ RSpec/MultipleMemoizedHelpers:
 RSpec/SubjectStub:
   Enabled: false
 
-RSpec/ContextWording:
-  Enabled: false
-
 RSpec/StubbedMock:
   Enabled: false

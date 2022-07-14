@@ -10,6 +10,8 @@ module Modules
     MONEY_COMMANDS = %w[PM WM SM].freeze
     AGREE_COMMAND = 'y'
     EXIT_COMMAND = 'exit'
+    LOGIN_MIN_LENGTH = 3
+    LOGIN_MAX_LENGTH = 20
     CARD_NUMBER_LENGTH = 12
     OPERATIONS = { show_cards: 'SC',
                    create_card: 'CC',

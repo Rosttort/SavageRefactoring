@@ -42,9 +42,7 @@ RSpec.describe Modules::Commands::TransactionCommands do
           end
         end
 
-        it do
-          expect { transaction_service.put_money }.to output(expected_message).to_stdout
-        end
+        it { expect { transaction_service.put_money }.to output(expected_message).to_stdout }
       end
 
       context 'when exit if first gets is exit' do
@@ -72,9 +70,7 @@ RSpec.describe Modules::Commands::TransactionCommands do
             allow(transaction_service).to receive(:gets).and_return((fake_cards.length + 1).to_s, 'exit')
           end
 
-          it do
-            expect { transaction_service.put_money }.to output(/#{I18n.t('error.wrong_number')}/).to_stdout
-          end
+          it { expect { transaction_service.put_money }.to output(/#{I18n.t('error.wrong_number')}/).to_stdout }
         end
 
         context 'when negative input' do
@@ -82,9 +78,7 @@ RSpec.describe Modules::Commands::TransactionCommands do
             allow(transaction_service).to receive(:gets).and_return(-1.to_s, 'exit')
           end
 
-          it do
-            expect { transaction_service.put_money }.to output(/#{I18n.t('error.wrong_number')}/).to_stdout
-          end
+          it { expect { transaction_service.put_money }.to output(/#{I18n.t('error.wrong_number')}/).to_stdout }
         end
       end
 
@@ -108,9 +102,7 @@ RSpec.describe Modules::Commands::TransactionCommands do
             end
           end
 
-          it do
-            expect { transaction_service.put_money }.to output(/#{I18n.t('common.input_amount')}/).to_stdout
-          end
+          it { expect { transaction_service.put_money }.to output(/#{I18n.t('common.input_amount')}/).to_stdout }
         end
 
         context 'with amount lower then 0' do
@@ -123,9 +115,7 @@ RSpec.describe Modules::Commands::TransactionCommands do
             end
           end
 
-          it do
-            expect { transaction_service.put_money }.to output(/#{I18n.t('common.input_amount')}/).to_stdout
-          end
+          it { expect { transaction_service.put_money }.to output(/#{I18n.t('common.input_amount')}/).to_stdout }
         end
 
         context 'with amount greater then 0' do
@@ -275,9 +265,11 @@ RSpec.describe Modules::Commands::TransactionCommands do
         context 'with correct output' do
           let(:commands) { [chosen_card_number, incorrect_money_amount] }
 
-          it do
-            expect { transaction_service.withdraw_money }.to output(/#{I18n.t('common.withdraw_amount')}/).to_stdout
-          end
+          it {
+            expect do
+              transaction_service.withdraw_money
+            end.to output(/#{I18n.t('common.withdraw_amount')}/).to_stdout
+          }
         end
       end
     end

@@ -7,7 +7,7 @@ module Modules
 
       def withdraw_money
         output_message('common.choose_card_withdrawing')
-        current_card = find_card(@current_account)
+        current_card = find_card
         return unless current_card
         return unless withdraw_operation(current_card, user_input('common.withdraw_amount').to_i)
 
@@ -16,7 +16,7 @@ module Modules
 
       def put_money
         output_message('common.choose_card')
-        current_card = find_card(@current_account)
+        current_card = find_card
         return unless current_card
         return unless put_operation(current_card, user_input('common.input_amount').to_i)
 
@@ -25,7 +25,7 @@ module Modules
 
       def send_money
         output_message('common.choose_card_sending')
-        sender_card = find_card(current_account)
+        sender_card = find_card
         recipient_card = find_card_number
         return unless recipient_card && sender_card
         return unless send_operation(sender_card, recipient_card,

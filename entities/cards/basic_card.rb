@@ -17,7 +17,7 @@ module Entities
         @balance = start_balance
       end
 
-      def withdraw_or_sent(amount, type)
+      def withdraw(amount, type)
         @balance -= amount + public_send("#{type}_tax", amount)
       end
 

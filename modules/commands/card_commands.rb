@@ -16,7 +16,7 @@ module Modules
 
       def destroy_card
         output_message('common.if_you_want_to_delete')
-        current_card = find_card(@current_account)
+        current_card = find_card
         return unless current_card
         return unless confirmed?(user_input('cards.confirm_deletion', number: current_card.number))
 
