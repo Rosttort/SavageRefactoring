@@ -10,9 +10,9 @@ RSpec.describe Modules::Commands::AccountCommands do
 
   describe '#create' do
     let(:success_name_input) { Faker::Name.first_name }
-    let(:success_age_input) { Faker::Number.between(from: 23, to: 90).to_s }
-    let(:success_login_input) { Faker::Internet.username(specifier: 4..20) }
-    let(:success_password_input) { Faker::Internet.password(min_length: 6, max_length: 30) }
+    let(:success_age_input) { Faker::Number.between(from: Modules::Constants::AGE_MIN_LENGTH, to: Modules::Constants::AGE_MAX_LENGTH).to_s }
+    let(:success_login_input) { Faker::Internet.username(specifier: Modules::Constants::LOGIN_MIN_LENGTH..Modules::Constants::LOGIN_MAX_LENGTH) }
+    let(:success_password_input) { Faker::Internet.password(min_length: Modules::Constants::PASSWORD_MIN_LENGTH, max_length: Modules::Constants::PASSWORD_MAX_LENGTH) }
 
     let(:right_inputs) do
       [success_name_input, success_age_input, success_login_input, success_password_input]
@@ -92,8 +92,7 @@ RSpec.describe Modules::Commands::AccountCommands do
         end
 
         context 'when longer' do
-          let(:error_login_length_input) { 'A' * wrong_length }
-          let(:wrong_length) { Modules::Constants::LOGIN_MIN_LENGTH - 1 }
+          let(:error_login_length_input) { 'A' * (Modules::Constants::LOGIN_MIN_LENGTH - 1) }
           let(:wrong_inputs) do
             [success_name_input, success_age_input, error_login_length_input, success_password_input]
           end
@@ -113,8 +112,7 @@ RSpec.describe Modules::Commands::AccountCommands do
         end
 
         context 'when shorter' do
-          let(:error_login_length_input) { 'A' * wrong_length }
-          let(:wrong_length) { Modules::Constants::LOGIN_MAX_LENGTH + 1 }
+          let(:error_login_length_input) { 'A' * (Modules::Constants::LOGIN_MAX_LENGTH + 1) }
           let(:wrong_inputs) do
             [success_name_input, success_age_input, error_login_length_input, success_password_input]
           end
@@ -177,7 +175,7 @@ RSpec.describe Modules::Commands::AccountCommands do
         end
 
         context 'with length maximum' do
-          let(:error_age_input) { '91' }
+          let(:error_age_input) { (Modules::Constants::AGE_MAX_LENGTH + 1).to_s }
           let(:wrong_inputs) do
             [success_name_input, error_age_input, success_login_input, success_password_input]
           end
@@ -220,7 +218,7 @@ RSpec.describe Modules::Commands::AccountCommands do
         end
 
         context 'when longer' do
-          let(:error_password_input) { 'E' * 5 }
+          let(:error_password_input) { 'E' * (Modules::Constants::PASSWORD_MIN_LENGTH - 1) }
 
           it {
             expect do
@@ -230,7 +228,7 @@ RSpec.describe Modules::Commands::AccountCommands do
         end
 
         context 'when shorter' do
-          let(:error_password_input) { 'E' * 31 }
+          let(:error_password_input) { 'E' * (Modules::Constants::PASSWORD_MAX_LENGTH + 1) }
 
           it {
             expect do
@@ -247,7 +245,7 @@ RSpec.describe Modules::Commands::AccountCommands do
       let(:login) { 'fafafa' }
       let(:password) { '123123' }
       let(:success_name_input) { Faker::Name.first_name }
-      let(:success_age_input) { Faker::Number.between(from: 23, to: 90).to_s }
+      let(:success_age_input) { Faker::Number.between(from: Modules::Constants::AGE_MIN_LENGTH, to: Modules::Constants::AGE_MAX_LENGTH).to_s }
       let(:correct_account) do
         Entities::Account.new(name: success_name_input,
                               age: success_age_input,

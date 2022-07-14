@@ -61,9 +61,9 @@ RSpec.describe Entities::Console do
   describe '#main_menu' do
     let(:account) { Entities::Account.new(name: name, age: age, login: login, password: password) }
     let(:name) { Faker::Name.first_name }
-    let(:age) { Faker::Number.between(from: 23, to: 90) }
-    let(:login) { Faker::Internet.username(specifier: 4..20) }
-    let(:password) { Faker::Internet.password(min_length: 6, max_length: 30) }
+    let(:age) { Faker::Number.between(from: Modules::Constants::AGE_MIN_LENGTH, to: Modules::Constants::AGE_MAX_LENGTH) }
+    let(:login) { Faker::Internet.username(specifier: Modules::Constants::LOGIN_MIN_LENGTH..Modules::Constants::LOGIN_MAX_LENGTH) }
+    let(:password) { Faker::Internet.password(min_length: Modules::Constants::PASSWORD_MIN_LENGTH, max_length: Modules::Constants::PASSWORD_MAX_LENGTH) }
     let(:test_filename) { 'spec/fixtures/test_account.yml' }
 
     context 'with correct outout' do
@@ -73,7 +73,7 @@ RSpec.describe Entities::Console do
         console.instance_variable_set(:@current_account, account)
         allow(console).to receive(:show_cards)
         allow(console).to receive(:exit)
-        allow(console).to receive_message_chain(:gets, :chomp).and_return('SC', 'exit')
+        allow(console).to receive_message_chain(:gets, :chomp).and_return(Modules::Constants::OPERATIONS[:show_cards], Modules::Constants::EXIT_COMMAND)
       end
 
       after { FileUtils.rm_rf(test_filename) }

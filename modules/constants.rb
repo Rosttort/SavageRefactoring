@@ -10,7 +10,11 @@ module Modules
     MONEY_COMMANDS = %w[PM WM SM].freeze
     AGREE_COMMAND = 'y'
     EXIT_COMMAND = 'exit'
-    LOGIN_MIN_LENGTH = 3
+    AGE_MIN_LENGTH = 23
+    AGE_MAX_LENGTH = 90
+    PASSWORD_MIN_LENGTH = 6
+    PASSWORD_MAX_LENGTH = 30
+    LOGIN_MIN_LENGTH = 4
     LOGIN_MAX_LENGTH = 20
     CARD_NUMBER_LENGTH = 12
     OPERATIONS = { show_cards: 'SC',
