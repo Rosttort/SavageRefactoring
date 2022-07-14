@@ -1,3 +1,5 @@
-require_relative 'account'
+# frozen_string_literal: true
 
-Account.new.console
+require_relative 'loader'
+
+Entities::Console.new.console
